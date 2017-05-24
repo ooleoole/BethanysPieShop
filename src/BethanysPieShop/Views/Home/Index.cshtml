@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model HomeViewModel
+
+
+@await Html.PartialAsync("Carousel")
+
+<h2>Here’s our weekly selection of pies!</h2>
+<h4>Our weekly selection - just for you!</h4>
+
+<div class="row">
+
+    @foreach (var pie in Model.PiesOfTheWeek)
+    {
+        @Html.Partial("PieOfTheWeekSummary", pie)
+    }
+
+</div>
