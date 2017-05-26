@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model PiesHistoryViewModel
+
+<h1>Pie history</h1>
+@foreach (var pie in Model.PieHistoryViewModels)
+{
+    @Html.Partial("PieHistorySummary", pie)
+}

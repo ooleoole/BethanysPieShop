@@ -14,5 +14,10 @@ namespace BethanysPieShop.Models
             _appDbContext = appDbContext;
         }
         public IEnumerable<Category> Categories => _appDbContext.Categories;
+        public void Add(Category category)
+        {
+            _appDbContext.Add(category);
+            _appDbContext.SaveChanges();
+        }
     }
 }

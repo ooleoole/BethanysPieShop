@@ -31,9 +31,21 @@ namespace BethanysPieShop.Models
             }
         }
 
+        public void Update(Pie pie)
+        {
+            
+            _appDbContext.Update(pie);
+            _appDbContext.SaveChanges();
+        }
         public Pie GetPieById(int pieId)
         {
             return _appDbContext.Pies.FirstOrDefault(p => p.PieId == pieId);
+        }
+
+        public void AddPie(Pie pie)
+        {
+            _appDbContext.Add(pie);
+            _appDbContext.SaveChanges();
         }
     }
 }

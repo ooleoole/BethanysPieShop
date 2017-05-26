@@ -64,5 +64,11 @@ namespace BethanysPieShop.Controllers
             return View(pie);
         }
 
+        public IActionResult History()
+        {
+            var pies = _pieRepository.Pies.OrderBy(p => p.PieId).ToList();
+            var model = new PiesHistoryViewModel(pies);
+            return View("PieHistory", model);
+        }
     }
 }

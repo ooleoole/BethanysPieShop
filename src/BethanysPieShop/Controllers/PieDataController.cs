@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BethanysPieShop.Models;
 using BethanysPieShop.ViewModels;
@@ -27,15 +25,9 @@ namespace BethanysPieShop.Controllers
 
             dbPies = _pieRepository.Pies.OrderBy(p => p.PieId).Take(10);
 
-            List<PieViewModel> pies = new List<PieViewModel>();
-
-            foreach (var dbPie in dbPies)
-            {
-                pies.Add(MapDbPieToPieViewModel(dbPie));
-            }
-            return pies;
+            return dbPies.Select(MapDbPieToPieViewModel).ToList();
         }
-
+        
         private PieViewModel MapDbPieToPieViewModel(Pie dbPie)
         {
             return new PieViewModel()

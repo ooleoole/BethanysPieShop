@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -8,7 +9,7 @@
     <link href="~/Content/site.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <title>Bethany's Pie Shop</title>
+    <title>Bethany's CreamPie Shop</title>
 </head>
 <body>
 
@@ -27,6 +28,8 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     @await Component.InvokeAsync("CategoryMenu")
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
+                    @await Html.PartialAsync("AdminMenu")
+                    <li><a asp-controller="Pie" asp-action="History">PieHistory</a></li>
                     @await Component.InvokeAsync("ShoppingCartSummary")
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
