@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BethanysPieShop.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -26,21 +28,23 @@ namespace BethanysPieShop
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddDbContext<AppDbContext>(options =>
                                          options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
 
             //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
             //services.AddTransient<IPieRepository, MockPieRepository>();
-
+            
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
-
+            services.AddTransient<AppDbContext, AppDbContext>();
             services.AddTransient<IPieRepository, PieRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IDatabaseHandler, DatabaseHandler>();
+            
             services.AddIdentity<IdentityUser, IdentityRole>(io =>
             {
                 io.Password.RequireDigit = false;
@@ -55,6 +59,7 @@ namespace BethanysPieShop
 
             services.AddMemoryCache();
             services.AddSession();
+            services.AddTransient<IApplicationBuilder, ApplicationBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

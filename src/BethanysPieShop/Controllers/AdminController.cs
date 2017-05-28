@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using BethanysPieShop.Migrations;
 using BethanysPieShop.Models;
 using BethanysPieShop.ViewModels;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BethanysPieShop.Controllers
@@ -15,9 +20,11 @@ namespace BethanysPieShop.Controllers
     {
         private readonly IPieRepository _pieRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private IDatabaseHandler _databaseHandler;
 
-        public AdminController(IPieRepository pieRepository, ICategoryRepository categoryRepository)
+        public AdminController(IPieRepository pieRepository, ICategoryRepository categoryRepository, IDatabaseHandler databaseHandler)
         {
+            _databaseHandler = databaseHandler;
             _pieRepository = pieRepository;
             _categoryRepository = categoryRepository;
         }
@@ -133,6 +140,19 @@ namespace BethanysPieShop.Controllers
             return View("AddCategory");
         }
 
+        public IActionResult ResetDatabase()
+        {
+            try
+            {
+                _databaseHandler.ResetDataBase();
+            }
+            catch (Exception)
+            {
+                return View(false);
+            }
+
+            return View(true);
+        }
 
         private Category MappAddCategoryViewModelToCategory(AddCategoryViewModel model)
         {

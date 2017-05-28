@@ -125,7 +125,7 @@ namespace BethanysPieShop.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Amount");
-
+                    
                     b.Property<int?>("PieId");
 
                     b.Property<string>("ShoppingCartId");

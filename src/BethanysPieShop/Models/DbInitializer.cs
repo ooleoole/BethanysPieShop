@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BethanysPieShop.Models
 {
@@ -10,7 +11,7 @@ namespace BethanysPieShop.Models
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
             AppDbContext context = applicationBuilder.ApplicationServices.GetRequiredService<AppDbContext>();
-
+            
             if (!context.Categories.Any())
             {
                 context.Categories.AddRange(Categories.Select(c => c.Value));
@@ -35,9 +36,11 @@ namespace BethanysPieShop.Models
             }
 
             context.SaveChanges();
+            categories = null;
         }
 
         private static Dictionary<string, Category> categories;
+
         public static Dictionary<string, Category> Categories
         {
             get
