@@ -153,6 +153,13 @@ namespace BethanysPieShop.Controllers
 
             return View(true);
         }
+        [HttpGet]
+        public IActionResult ChangeName(JsonResult model)
+        {
+
+            //var pie = _pieRepository.GetPieById(model.Id);
+            return null;
+        }
 
         private Category MappAddCategoryViewModelToCategory(AddCategoryViewModel model)
         {

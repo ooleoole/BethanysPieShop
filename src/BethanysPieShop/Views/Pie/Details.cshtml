@@ -9,9 +9,27 @@
         </h3>
         <h4>@Model.ShortDescription</h4>
         <p>@Model.LongDescription</p>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Change name</label>
+            <div class="col-md-10">
+                <input id="changeNameInput" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="changeNameBtn" type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
         <p class="button">
-            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCar"
                asp-route-pieId="@Model.PieId">Add pie</a>
         </p>
+
     </div>
 </div>

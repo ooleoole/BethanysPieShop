@@ -27,6 +27,8 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     @await Component.InvokeAsync("CategoryMenu")
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @await Component.InvokeAsync("PiesOfTheWeekMenu")
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @await Html.PartialAsync("AdminMenu")
                     <li><a asp-controller="Pie" asp-action="History">PieHistory</a></li>
