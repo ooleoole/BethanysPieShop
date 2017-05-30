@@ -2,7 +2,6 @@
 {
     public interface IDatabaseHandler
     {
-
         void ResetDataBase();
     }
 }
